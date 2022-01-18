@@ -30,6 +30,7 @@ export class CreateInquilinos1642466250846 implements MigrationInterface {
           {
             name: 'email',
             type: 'varchar',
+            isUnique: true,
           },
           {
             name: 'created_At',
