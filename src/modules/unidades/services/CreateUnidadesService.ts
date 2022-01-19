@@ -6,7 +6,7 @@ import UnidadesRepository from '../typeorm/repositories/UnidadesRepository';
 interface IRequest {
   identificacao: string;
   proprietario: string;
-  condominio: string;
+  condominio: number;
   endereco: string;
 }
 

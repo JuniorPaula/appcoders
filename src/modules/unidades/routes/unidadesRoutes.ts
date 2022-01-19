@@ -6,6 +6,7 @@ const unidadesRoutes = Router();
 
 const unidadesController = new UnidadesController();
 
+unidadesRoutes.get('/', unidadesController.index);
 unidadesRoutes.post('/', unidadesCreateVerify, unidadesController.create);
 
 export default unidadesRoutes;
