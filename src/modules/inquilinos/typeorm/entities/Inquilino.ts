@@ -8,8 +8,8 @@ import {
 
 @Entity('inquilinos')
 class Inquilino {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   nome: string;

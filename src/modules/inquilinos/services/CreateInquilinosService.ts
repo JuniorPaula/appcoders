@@ -1,6 +1,6 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import InquilinosRepository from '../repositories/InquilinosRepository';
+import InquilinosRepository from '../typeorm/repositories/InquilinosRepository';
 import Inquilino from '../typeorm/entities/Inquilino';
 
 interface IRequest {

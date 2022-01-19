@@ -1,9 +1,8 @@
+import inquilinosRoutes from '@modules/inquilinos/routes/inquilinosRoutes';
 import { Router } from 'express';
 
 const routes = Router();
 
-routes.get('/', (request, response) => {
-  return response.json('Hello dev!');
-});
+routes.use('/inquilinos', inquilinosRoutes);
 
 export default routes;
