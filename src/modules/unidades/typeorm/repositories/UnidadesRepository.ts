@@ -14,6 +14,16 @@ class UnidadesRepository extends Repository<Unidade> {
 
     return unidade;
   }
+
+  public async findById(id: string): Promise<Unidade | undefined> {
+    const unidade_id = await this.findOne({
+      where: {
+        id,
+      },
+    });
+
+    return unidade_id;
+  }
 }
 
 export default UnidadesRepository;
