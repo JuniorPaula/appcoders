@@ -3,12 +3,12 @@ import DespesaUnidade from '../entities/DespesaUnidade';
 
 @EntityRepository(DespesaUnidade)
 class DespesasUnidadesRepository extends Repository<DespesaUnidade> {
-  public async findByIType(
-    tipo_despesa: string
+  public async findByIUnidade(
+    unidade_id: string
   ): Promise<DespesaUnidade | undefined> {
     const despesa_unidade = await this.findOne({
       where: {
-        tipo_despesa,
+        unidade_id,
       },
     });
 
