@@ -6,13 +6,13 @@ class DespesasUnidadesRepository extends Repository<DespesaUnidade> {
   public async findByIUnidade(
     unidade_id: string
   ): Promise<DespesaUnidade | undefined> {
-    const despesa_unidade = await this.findOne({
+    const despesa = await this.findOne({
       where: {
         unidade_id,
       },
     });
 
-    return despesa_unidade;
+    return despesa;
   }
 }
 

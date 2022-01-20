@@ -14,4 +14,6 @@ despesasUnidadesRoutes.post(
   despesasUnidadesController.create
 );
 
+despesasUnidadesRoutes.get('/:id', despesasUnidadesController.show);
+
 export default despesasUnidadesRoutes;
