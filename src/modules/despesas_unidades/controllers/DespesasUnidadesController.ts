@@ -1,7 +1,16 @@
 import { Request, Response } from 'express';
 import CreateDespesaUnidadeService from '../services/CreateDespesaUnidadeService';
+import ListDespesasUnidadesService from '../services/ListDespesasUnidadesService';
 
 export default class DespesasUnidadesController {
+  public async index(request: Request, response: Response): Promise<Response> {
+    const listDespesas = new ListDespesasUnidadesService();
+
+    const despesasUnidades = await listDespesas.execute();
+
+    return response.json(despesasUnidades);
+  }
+
   public async create(request: Request, response: Response): Promise<Response> {
     const {
       descricao,

@@ -6,6 +6,8 @@ const despesasUnidadesRoutes = Router();
 
 const despesasUnidadesController = new DespesasUnidadesController();
 
+despesasUnidadesRoutes.get('/', despesasUnidadesController.index);
+
 despesasUnidadesRoutes.post(
   '/',
   despesasCreateVerify,
