@@ -14,6 +14,12 @@ despesasUnidadesRoutes.post(
   despesasUnidadesController.create
 );
 
+despesasUnidadesRoutes.put(
+  '/:id',
+  despesasCreateVerify,
+  despesasUnidadesController.update
+);
+
 despesasUnidadesRoutes.get('/:id', despesasUnidadesController.show);
 
 export default despesasUnidadesRoutes;
