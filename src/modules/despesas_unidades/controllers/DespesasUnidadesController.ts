@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import CreateDespesaUnidadeService from '../services/CreateDespesaUnidadeService';
+import GetDespesaVencidaService from '../services/GetDespesaVencidaService';
 import ListDespesasUnidadesService from '../services/ListDespesasUnidadesService';
 import ShowDespesasUnidadesService from '../services/ShowDespesasUnidadesService';
 import UpdateDespesaUnidadeService from '../services/UpdateDespesaUnidadeService';
@@ -72,6 +73,18 @@ export default class DespesasUnidadesController {
       status_pagamento,
       unidade_id,
     });
+
+    return response.json(despesa);
+  }
+
+  public async getDespesaVencida(
+    request: Request,
+    response: Response
+  ): Promise<Response> {
+    const despesaVencida = new GetDespesaVencidaService();
+    const { data } = request.body;
+
+    const despesa = await despesaVencida.execute({ data });
 
     return response.json(despesa);
   }
