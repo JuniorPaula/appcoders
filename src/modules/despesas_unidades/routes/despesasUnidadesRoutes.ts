@@ -6,6 +6,11 @@ const despesasUnidadesRoutes = Router();
 
 const despesasUnidadesController = new DespesasUnidadesController();
 
+despesasUnidadesRoutes.get(
+  '/filters',
+  despesasUnidadesController.getDespesaVencida
+);
+
 despesasUnidadesRoutes.get('/', despesasUnidadesController.index);
 
 despesasUnidadesRoutes.post(
