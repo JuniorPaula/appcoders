@@ -1,4 +1,5 @@
-import FakeUnidadeRepository from '@modules/unidades/domain/repositories/FakeUnidadeRepository';
+import FakeUnidadeRepository from '@modules/unidades/domain/repositories/fake/FakeUnidadeRepository';
+import AppError from '@shared/errors/AppError';
 import CreateUnidadesService from './CreateUnidadesService';
 
 describe('List Inquilino', () => {
@@ -16,7 +17,7 @@ describe('List Inquilino', () => {
     expect(unidade).toHaveProperty('id');
   });
 
-  it('Should be able find unidade by identify', async () => {
+  it('Should not be able an exists two unit the same identify', async () => {
     const fakeUnidadeRepository = new FakeUnidadeRepository();
     const createUnidade = new CreateUnidadesService(fakeUnidadeRepository);
 
@@ -27,11 +28,14 @@ describe('List Inquilino', () => {
       endereco: 'Rua A',
     });
 
-    const unidade = await fakeUnidadeRepository.findByIdentify(
-      'Condominio Albert'
-    );
-
-    expect(unidade?.identificacao).toBe('Condominio Albert');
+    expect(
+      createUnidade.execute({
+        identificacao: 'Condominio Albert',
+        proprietario: 'Pedro Sousa',
+        condominio: 20,
+        endereco: 'Rua A',
+      })
+    ).rejects.toBeInstanceOf(AppError);
   });
 
   it('Should be able find an unidade by id', async () => {

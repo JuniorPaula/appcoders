@@ -1,6 +1,5 @@
 import UnidadesRepository from '@modules/unidades/infra/typeorm/repositories/UnidadesRepository';
 import AppError from '@shared/errors/AppError';
-import { getCustomRepository } from 'typeorm';
 import { ICreateDespesaUnidade } from '../domain/models/ICreateDespesaUnidade';
 import { IDespesaUnidade } from '../domain/models/IDespesaUnidade';
 import { IDespesaUnidadeRepository } from '../domain/repositories/IDespesaUnidadeRepository';
@@ -16,8 +15,9 @@ class CreateDespesaUnidadeService {
     status_pagamento,
     unidade_id,
   }: ICreateDespesaUnidade): Promise<IDespesaUnidade> {
-    const unidadesRepository = getCustomRepository(UnidadesRepository);
-    const unidadeExists = await unidadesRepository.findById(unidade_id);
+    const unidadeRepository = new UnidadesRepository();
+
+    const unidadeExists = await unidadeRepository.findById(unidade_id);
 
     if (!unidadeExists) {
       throw new AppError('Unidade does not exist.');
