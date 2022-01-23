@@ -1,3 +1,4 @@
+import { IDespesaUnidade } from '@modules/despesas_unidades/domain/models/IDespesaUnidade';
 import Unidade from '@modules/unidades/infra/typeorm/entities/Unidade';
 import {
   Column,
@@ -10,7 +11,7 @@ import {
 } from 'typeorm';
 
 @Entity('despesas_unidades')
-class DespesaUnidade {
+class DespesaUnidade implements IDespesaUnidade {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

@@ -4,10 +4,12 @@ import GetDespesaVencidaService from '../../../services/GetDespesaVencidaService
 import ListDespesasUnidadesService from '../../../services/ListDespesasUnidadesService';
 import ShowDespesasUnidadesService from '../../../services/ShowDespesasUnidadesService';
 import UpdateDespesaUnidadeService from '../../../services/UpdateDespesaUnidadeService';
+import DespesasUnidadesRepository from '../../typeorm/repositories/DespesasUnidadesRepository';
 
 export default class DespesasUnidadesController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const listDespesas = new ListDespesasUnidadesService();
+    const listRepository = new DespesasUnidadesRepository();
+    const listDespesas = new ListDespesasUnidadesService(listRepository);
 
     const despesasUnidades = await listDespesas.execute();
 
@@ -15,7 +17,8 @@ export default class DespesasUnidadesController {
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
-    const showDespesa = new ShowDespesasUnidadesService();
+    const showDespesaRepository = new DespesasUnidadesRepository();
+    const showDespesa = new ShowDespesasUnidadesService(showDespesaRepository);
     const unidade_id = request.params.id;
 
     const despesa = await showDespesa.execute({ unidade_id });
@@ -33,7 +36,11 @@ export default class DespesasUnidadesController {
       unidade_id,
     } = request.body;
 
-    const createDespesaUnidade = new CreateDespesaUnidadeService();
+    const despesasRepository = new DespesasUnidadesRepository();
+
+    const createDespesaUnidade = new CreateDespesaUnidadeService(
+      despesasRepository
+    );
 
     const dateFormated = vencimento_fatura.split('/').reverse().join('-');
 
@@ -62,7 +69,10 @@ export default class DespesasUnidadesController {
 
     const dateFormated = vencimento_fatura.split('/').reverse().join('-');
 
-    const updateDespesa = new UpdateDespesaUnidadeService();
+    const updateDespesaRepository = new DespesasUnidadesRepository();
+    const updateDespesa = new UpdateDespesaUnidadeService(
+      updateDespesaRepository
+    );
 
     const despesa = await updateDespesa.execute({
       id,
@@ -81,7 +91,10 @@ export default class DespesasUnidadesController {
     request: Request,
     response: Response
   ): Promise<Response> {
-    const despesaVencida = new GetDespesaVencidaService();
+    const despesaVencidaRepository = new DespesasUnidadesRepository();
+    const despesaVencida = new GetDespesaVencidaService(
+      despesaVencidaRepository
+    );
     const { data } = request.body;
 
     const despesa = await despesaVencida.execute({ data });

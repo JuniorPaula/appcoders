@@ -1,19 +1,13 @@
 import UnidadesRepository from '@modules/unidades/infra/typeorm/repositories/UnidadesRepository';
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import DespesaUnidade from '../infra/typeorm/entities/DespesaUnidade';
-import DespesasUnidadesRepository from '../infra/typeorm/repositories/DespesasUnidadesRepository';
-
-interface IRequest {
-  descricao: string;
-  tipo_despesa: string;
-  valor: number;
-  vencimento_fatura: Date;
-  status_pagamento: boolean;
-  unidade_id: string;
-}
+import { ICreateDespesaUnidade } from '../domain/models/ICreateDespesaUnidade';
+import { IDespesaUnidade } from '../domain/models/IDespesaUnidade';
+import { IDespesaUnidadeRepository } from '../domain/repositories/IDespesaUnidadeRepository';
 
 class CreateDespesaUnidadeService {
+  constructor(private despesaUnidadeRepository: IDespesaUnidadeRepository) {}
+
   public async execute({
     descricao,
     tipo_despesa,
@@ -21,11 +15,7 @@ class CreateDespesaUnidadeService {
     vencimento_fatura,
     status_pagamento,
     unidade_id,
-  }: IRequest): Promise<DespesaUnidade> {
-    const despesasUnidadesRepository = getCustomRepository(
-      DespesasUnidadesRepository
-    );
-
+  }: ICreateDespesaUnidade): Promise<IDespesaUnidade> {
     const unidadesRepository = getCustomRepository(UnidadesRepository);
     const unidadeExists = await unidadesRepository.findById(unidade_id);
 
@@ -33,7 +23,7 @@ class CreateDespesaUnidadeService {
       throw new AppError('Unidade does not exist.');
     }
 
-    const despesa_unidade = despesasUnidadesRepository.create({
+    const despesa_unidade = await this.despesaUnidadeRepository.create({
       descricao,
       tipo_despesa,
       valor,
@@ -41,8 +31,6 @@ class CreateDespesaUnidadeService {
       status_pagamento,
       unidade_id,
     });
-
-    await despesasUnidadesRepository.save(despesa_unidade);
 
     return despesa_unidade;
   }

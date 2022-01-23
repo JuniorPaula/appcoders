@@ -1,19 +1,17 @@
 import AppError from '@shared/errors/AppError';
-import { getCustomRepository } from 'typeorm';
-import DespesaUnidade from '../infra/typeorm/entities/DespesaUnidade';
-import DespesasUnidadesRepository from '../infra/typeorm/repositories/DespesasUnidadesRepository';
-
-interface IRequest {
-  unidade_id: string;
-}
+import { IDespesaUnidade } from '../domain/models/IDespesaUnidade';
+import { IShowDespesaunidade } from '../domain/models/IShowDespesaUnidade';
+import { IDespesaUnidadeRepository } from '../domain/repositories/IDespesaUnidadeRepository';
 
 class ShowDespesasUnidadesService {
-  public async execute({ unidade_id }: IRequest): Promise<DespesaUnidade> {
-    const despesaUnidadeRepository = getCustomRepository(
-      DespesasUnidadesRepository
-    );
+  constructor(private despesaUnidadeRepository: IDespesaUnidadeRepository) {}
 
-    const despesa = await despesaUnidadeRepository.findByIUnidade(unidade_id);
+  public async execute({
+    unidade_id,
+  }: IShowDespesaunidade): Promise<IDespesaUnidade> {
+    const despesa = await this.despesaUnidadeRepository.findByIUnidade(
+      unidade_id
+    );
 
     if (!despesa) {
       throw new AppError('Despesa not found.');

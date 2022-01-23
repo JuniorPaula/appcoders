@@ -1,14 +1,11 @@
-import { getCustomRepository } from 'typeorm';
-import DespesaUnidade from '../infra/typeorm/entities/DespesaUnidade';
-import DespesasUnidadesRepository from '../infra/typeorm/repositories/DespesasUnidadesRepository';
+import { IDespesaUnidade } from '../domain/models/IDespesaUnidade';
+import { IDespesaUnidadeRepository } from '../domain/repositories/IDespesaUnidadeRepository';
 
 class ListDespesasUnidadesService {
-  public async execute(): Promise<DespesaUnidade[]> {
-    const despesaUnidadeRepository = getCustomRepository(
-      DespesasUnidadesRepository
-    );
+  constructor(private despesaUnidadeRepository: IDespesaUnidadeRepository) {}
 
-    const despesasUnidades = await despesaUnidadeRepository.find();
+  public async execute(): Promise<IDespesaUnidade[]> {
+    const despesasUnidades = await this.despesaUnidadeRepository.find();
 
     return despesasUnidades;
   }

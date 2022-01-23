@@ -1,18 +1,14 @@
-import { getCustomRepository } from 'typeorm';
-import DespesaUnidade from '../infra/typeorm/entities/DespesaUnidade';
-import DespesasUnidadesRepository from '../infra/typeorm/repositories/DespesasUnidadesRepository';
-
-interface IRequest {
-  data: string;
-}
+import { IDespesaUnidade } from '../domain/models/IDespesaUnidade';
+import { IGetDespesaVencida } from '../domain/models/IGetDespesaVencida';
+import { IDespesaUnidadeRepository } from '../domain/repositories/IDespesaUnidadeRepository';
 
 class GetDespesaVencidaService {
-  public async execute({ data }: IRequest): Promise<DespesaUnidade[]> {
-    const despesaVencidaRepository = getCustomRepository(
-      DespesasUnidadesRepository
-    );
+  constructor(private despesaUnidadeRepository: IDespesaUnidadeRepository) {}
 
-    const despesaVencida = await despesaVencidaRepository.find();
+  public async execute({
+    data,
+  }: IGetDespesaVencida): Promise<IDespesaUnidade[]> {
+    const despesaVencida = await this.despesaUnidadeRepository.find();
 
     const dateFormated = data.split('/').reverse().join('-');
 

@@ -1,19 +1,11 @@
 import AppError from '@shared/errors/AppError';
-import { getCustomRepository } from 'typeorm';
-import DespesaUnidade from '../infra/typeorm/entities/DespesaUnidade';
-import DespesasUnidadesRepository from '../infra/typeorm/repositories/DespesasUnidadesRepository';
-
-interface IRequest {
-  id: string;
-  descricao: string;
-  tipo_despesa: string;
-  valor: number;
-  vencimento_fatura: Date;
-  status_pagamento: boolean;
-  unidade_id: string;
-}
+import { IDespesaUnidade } from '../domain/models/IDespesaUnidade';
+import { IUpdateDespesaUnidade } from '../domain/models/IUpdateDespesaUnidade';
+import { IDespesaUnidadeRepository } from '../domain/repositories/IDespesaUnidadeRepository';
 
 class UpdateDespesaUnidadeService {
+  constructor(private despesaUnidadeRepository: IDespesaUnidadeRepository) {}
+
   public async execute({
     id,
     descricao,
@@ -22,12 +14,8 @@ class UpdateDespesaUnidadeService {
     vencimento_fatura,
     status_pagamento,
     unidade_id,
-  }: IRequest): Promise<DespesaUnidade> {
-    const despesasUnidadesRepository = getCustomRepository(
-      DespesasUnidadesRepository
-    );
-
-    const despesa = await despesasUnidadesRepository.findById(id);
+  }: IUpdateDespesaUnidade): Promise<IDespesaUnidade> {
+    const despesa = await this.despesaUnidadeRepository.findById(id);
 
     if (!despesa) {
       throw new AppError('Despesa not found.');
@@ -40,7 +28,7 @@ class UpdateDespesaUnidadeService {
     despesa.status_pagamento = status_pagamento;
     despesa.unidade_id = unidade_id;
 
-    await despesasUnidadesRepository.save(despesa);
+    await this.despesaUnidadeRepository.save(despesa);
 
     return despesa;
   }
