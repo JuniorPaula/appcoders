@@ -1,3 +1,4 @@
+import { IInquilino } from '@modules/inquilinos/domain/models/IInquilino';
 import {
   Column,
   CreateDateColumn,
@@ -7,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity('inquilinos')
-class Inquilino {
+class Inquilino implements IInquilino {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

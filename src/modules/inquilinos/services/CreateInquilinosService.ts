@@ -1,40 +1,31 @@
 import AppError from '@shared/errors/AppError';
-import { getCustomRepository } from 'typeorm';
-import InquilinosRepository from '../infra/typeorm/repositories/InquilinosRepository';
-import Inquilino from '../infra/typeorm/entities/Inquilino';
-
-interface IRequest {
-  nome: string;
-  idade: number;
-  sexo: string;
-  telefone: string;
-  email: string;
-}
+import { IInquilinoRepository } from '../domain/repositories/IInquilinoRepository';
+import { ICreateInquilino } from '../domain/models/ICreateInquilino';
+import { IInquilino } from '../domain/models/IInquilino';
 
 class CreateInquilinosService {
+  constructor(private inquilinoRepository: IInquilinoRepository) {}
+
   public async execute({
     nome,
     idade,
     sexo,
     telefone,
     email,
-  }: IRequest): Promise<Inquilino> {
-    const inquilinosRepository = getCustomRepository(InquilinosRepository);
-    const emailExists = await inquilinosRepository.findByEmail(email);
+  }: ICreateInquilino): Promise<IInquilino> {
+    const emailExists = await this.inquilinoRepository.findByEmail(email);
 
     if (emailExists) {
       throw new AppError('Email address already used.');
     }
 
-    const inquilino = inquilinosRepository.create({
+    const inquilino = await this.inquilinoRepository.create({
       nome,
       idade,
       sexo,
       telefone,
       email,
     });
-
-    await inquilinosRepository.save(inquilino);
 
     return inquilino;
   }
