@@ -1,12 +1,10 @@
-import { getCustomRepository } from 'typeorm';
-import Unidade from '../infra/typeorm/entities/Unidade';
-import UnidadesRepository from '../infra/typeorm/repositories/UnidadesRepository';
+import { IUnidade } from '../domain/models/IUnidade';
+import { IunidadeRepository } from '../domain/repositories/IUnidadeRepository';
 
 class ListUnidadesService {
-  public async execute(): Promise<Unidade[]> {
-    const unidadesRepository = getCustomRepository(UnidadesRepository);
-
-    const unidades = await unidadesRepository.find();
+  constructor(private unidadeRepository: IunidadeRepository) {}
+  public async execute(): Promise<IUnidade[]> {
+    const unidades = await this.unidadeRepository.find();
     return unidades;
   }
 }

@@ -1,3 +1,4 @@
+import { IUnidade } from '@modules/unidades/domain/models/IUnidade';
 import {
   Column,
   CreateDateColumn,
@@ -7,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity('unidades')
-class Unidade {
+class Unidade implements IUnidade {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
