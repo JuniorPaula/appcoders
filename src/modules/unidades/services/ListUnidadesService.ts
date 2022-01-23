@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
-import Unidade from '../typeorm/entities/Unidade';
-import UnidadesRepository from '../typeorm/repositories/UnidadesRepository';
+import Unidade from '../infra/typeorm/entities/Unidade';
+import UnidadesRepository from '../infra/typeorm/repositories/UnidadesRepository';
 
 class ListUnidadesService {
   public async execute(): Promise<Unidade[]> {

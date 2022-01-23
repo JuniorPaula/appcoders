@@ -1,4 +1,4 @@
-import UnidadesRepository from '@modules/unidades/typeorm/repositories/UnidadesRepository';
+import UnidadesRepository from '@modules/unidades/infra/typeorm/repositories/UnidadesRepository';
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
 import DespesaUnidade from '../infra/typeorm/entities/DespesaUnidade';

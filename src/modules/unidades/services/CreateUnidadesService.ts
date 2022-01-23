@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import Unidade from '../typeorm/entities/Unidade';
-import UnidadesRepository from '../typeorm/repositories/UnidadesRepository';
+import Unidade from '../infra/typeorm/entities/Unidade';
+import UnidadesRepository from '../infra/typeorm/repositories/UnidadesRepository';
 
 interface IRequest {
   identificacao: string;

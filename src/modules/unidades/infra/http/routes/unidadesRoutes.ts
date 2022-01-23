@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import UnidadesController from '../controllers/UnidadesController';
-import { unidadesCreateVerify } from '../middlewares/vefifyUnidades';
+import { unidadesCreateVerify } from '../../../middlewares/vefifyUnidades';
 
 const unidadesRoutes = Router();
 

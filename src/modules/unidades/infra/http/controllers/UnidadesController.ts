@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import CreateUnidadesService from '../services/CreateUnidadesService';
-import ListUnidadesService from '../services/ListUnidadesService';
+import CreateUnidadesService from '../../../services/CreateUnidadesService';
+import ListUnidadesService from '../../../services/ListUnidadesService';
 
 export default class UnidadesController {
   public async index(request: Request, response: Response): Promise<Response> {

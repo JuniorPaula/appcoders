@@ -1,4 +1,4 @@
-import Unidade from '@modules/unidades/typeorm/entities/Unidade';
+import Unidade from '@modules/unidades/infra/typeorm/entities/Unidade';
 import {
   Column,
   CreateDateColumn,
