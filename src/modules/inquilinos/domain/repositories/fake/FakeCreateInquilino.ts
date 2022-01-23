@@ -33,7 +33,12 @@ class FakeInquilinosRepository implements IInquilinoRepository {
     return inquilino;
   }
   async save(inquilino: Inquilino): Promise<Inquilino> {
-    Object.assign(this.inquilinos, inquilino);
+    const findIndex = this.inquilinos.findIndex(
+      (findInquilinos) => findInquilinos.id === inquilino.id
+    );
+
+    this.inquilinos[findIndex] = inquilino;
+
     return inquilino;
   }
   public async findByEmail(email: string): Promise<Inquilino | undefined> {
