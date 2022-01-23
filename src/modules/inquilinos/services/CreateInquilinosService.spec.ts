@@ -1,42 +1,49 @@
 import AppError from '@shared/errors/AppError';
-import FakeInquilinoRepository from '../tests/FakeCreateInquilino';
-
-let fakeInquilinoRepository: FakeInquilinoRepository;
+import CreateInquilinosService from './CreateInquilinosService';
+import FakeInquilinoRepository from '../domain/repositories/fake/FakeCreateInquilino';
 
 describe('Create Inquilino', () => {
-  beforeEach(() => {
-    fakeInquilinoRepository = new FakeInquilinoRepository();
-  });
+  it('Should be able create a new inquilino', async () => {
+    const fakeInquilinoRepository = new FakeInquilinoRepository();
 
-  it('Should be create a new inquilino', async () => {
-    const inquilino = await fakeInquilinoRepository.create({
-      nome: 'Pedro',
+    const createInquilino = new CreateInquilinosService(
+      fakeInquilinoRepository
+    );
+
+    const inquilino = await createInquilino.execute({
+      nome: 'Alan Bat',
       idade: 25,
       sexo: 'Masculino',
       telefone: '4798758-5202',
-      email: 'Pedro@teste.com',
+      email: 'Alan@teste.com',
     });
 
     expect(inquilino).toHaveProperty('id');
   });
 
-  it('Should be not able to create two inquilino with the same email.', async () => {
-    await fakeInquilinoRepository.create({
-      nome: 'Pedro',
+  it('Should not be able create an inquilino with the same email', async () => {
+    const fakeInquilinoRepository = new FakeInquilinoRepository();
+
+    const createInquilino = new CreateInquilinosService(
+      fakeInquilinoRepository
+    );
+
+    await createInquilino.execute({
+      nome: 'Alan Bat',
       idade: 25,
       sexo: 'Masculino',
       telefone: '4798758-5202',
-      email: 'Pedro@teste.com',
+      email: 'Alan@teste.com',
     });
 
-    await expect(
-      fakeInquilinoRepository.create({
-        nome: 'Pedro',
+    expect(
+      createInquilino.execute({
+        nome: 'Alan Bat',
         idade: 25,
         sexo: 'Masculino',
         telefone: '4798758-5202',
-        email: 'Pedro@teste.com',
+        email: 'Alan@teste.com',
       })
-    ).rejects.toEqual(new AppError('Email address already used.'));
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
