@@ -5,6 +5,8 @@
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)
 
+**Aplicação foi desenvolvida utilizando o padrão de projeto Domain-driven design (DDD). As tecnologias utilizadas foram NodeJS, Typescript, banco de dados relacional mysql, Jest para testes unitários, ORM TypeORM pra organizar as migrations.**
+
 
 **O desafio consiste em implementar um sistema que auxilie no cadastro e gestão dos inquilinos e unidades de um condomínio.**
 
