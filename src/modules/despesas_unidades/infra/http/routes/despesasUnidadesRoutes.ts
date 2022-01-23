@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import DespesasUnidadesController from '../controllers/DespesasUnidadesController';
-import { despesasCreateVerify } from '../middlewares/verifyDespesas';
+import { despesasCreateVerify } from '../../../middlewares/verifyDespesas';
 
 const despesasUnidadesRoutes = Router();
 

@@ -1,8 +1,8 @@
 import UnidadesRepository from '@modules/unidades/typeorm/repositories/UnidadesRepository';
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import DespesaUnidade from '../typeorm/entities/DespesaUnidade';
-import DespesasUnidadesRepository from '../typeorm/repositories/DespesasUnidadesRepository';
+import DespesaUnidade from '../infra/typeorm/entities/DespesaUnidade';
+import DespesasUnidadesRepository from '../infra/typeorm/repositories/DespesasUnidadesRepository';
 
 interface IRequest {
   descricao: string;

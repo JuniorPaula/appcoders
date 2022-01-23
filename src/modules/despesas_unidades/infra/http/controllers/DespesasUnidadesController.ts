@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import CreateDespesaUnidadeService from '../services/CreateDespesaUnidadeService';
-import GetDespesaVencidaService from '../services/GetDespesaVencidaService';
-import ListDespesasUnidadesService from '../services/ListDespesasUnidadesService';
-import ShowDespesasUnidadesService from '../services/ShowDespesasUnidadesService';
-import UpdateDespesaUnidadeService from '../services/UpdateDespesaUnidadeService';
+import CreateDespesaUnidadeService from '../../../services/CreateDespesaUnidadeService';
+import GetDespesaVencidaService from '../../../services/GetDespesaVencidaService';
+import ListDespesasUnidadesService from '../../../services/ListDespesasUnidadesService';
+import ShowDespesasUnidadesService from '../../../services/ShowDespesasUnidadesService';
+import UpdateDespesaUnidadeService from '../../../services/UpdateDespesaUnidadeService';
 
 export default class DespesasUnidadesController {
   public async index(request: Request, response: Response): Promise<Response> {
