@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import CreateInquilinosService from '../services/CreateInquilinosService';
-import ListInquilinosService from '../services/ListInquilinosService';
+import CreateInquilinosService from '../../../services/CreateInquilinosService';
+import ListInquilinosService from '../../../services/ListInquilinosService';
 
 export default class InquilinosController {
   public async index(request: Request, response: Response): Promise<Response> {

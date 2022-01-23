@@ -1,5 +1,5 @@
 import despesasUnidadesRoutes from '@modules/despesas_unidades/infra/http/routes/despesasUnidadesRoutes';
-import inquilinosRoutes from '@modules/inquilinos/routes/inquilinosRoutes';
+import inquilinosRoutes from '@modules/inquilinos/infra/http/routes/inquilinosRoutes';
 import unidadesRoutes from '@modules/unidades/routes/unidadesRoutes';
 import { Router } from 'express';
 

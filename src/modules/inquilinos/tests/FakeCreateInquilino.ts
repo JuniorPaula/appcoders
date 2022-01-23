@@ -1,6 +1,6 @@
 import AppError from '@shared/errors/AppError';
 import { v4 as uuidv4 } from 'uuid';
-import Inquilino from '../typeorm/entities/Inquilino';
+import Inquilino from '../infra/typeorm/entities/Inquilino';
 
 interface IRequest {
   nome: string;

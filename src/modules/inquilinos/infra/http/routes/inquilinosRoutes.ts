@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import InquilinosController from '../controllers/InquilinosController';
-import { inquilinosCreateVerify } from '../middlewares/verifyInquilinos';
+import { inquilinosCreateVerify } from '../../../middlewares/verifyInquilinos';
 
 const inquilinosRoutes = Router();
 

@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
-import InquilinosRepository from '../typeorm/repositories/InquilinosRepository';
-import Inquilino from '../typeorm/entities/Inquilino';
+import InquilinosRepository from '../infra/typeorm/repositories/InquilinosRepository';
+import Inquilino from '../infra/typeorm/entities/Inquilino';
 
 class ListInquilinosService {
   public async execute(): Promise<Inquilino[]> {
